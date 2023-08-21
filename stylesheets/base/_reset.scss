@@ -1,0 +1,140 @@
+/* Custom properties */
+
+:root {
+  /* Colors */
+  --black: #333333;
+  --white: #fefefe;
+
+  /* Typography */
+  --font-principal: Helvetica, Arial, sans-serif;
+  --font-secundary: Verdana;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    //--black: #fefefe;
+    //--white: #333333;
+  }
+}
+
+/* Sharp contrast */
+@media (prefers-contrast: high) {
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+  }
+}
+
+/* Disable animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Reset default styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+*::before, *::after {
+  display: block;
+}
+
+/* Solve images problems */
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  //object-fit: cover;
+  //object-position: center center;
+}
+
+/* links to box */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... Except the links in paragraphs */
+p a {
+  display: inline;
+}
+
+/* Delete list styles */
+li {
+  list-style-type: none;
+}
+
+/* Soft anchors */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Text styles */
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Solving problems with pseudo-elements of quotes */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: none;
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+/* Forms and input controls */
+form, input, textarea, select, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+  //appearance: none;
+}
+
+/* Tables */
+table, tr, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* HTML and body */
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  font-size: 100%;
+  font-family: var(--font-principal);
+  color: var(--black);
+  //hyphens: auto;
+  background-color: var(--white) ;
+}
