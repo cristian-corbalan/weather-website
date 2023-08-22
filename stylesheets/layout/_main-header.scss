@@ -1,3 +1,5 @@
+@use '../abstract/_mixins';
+
 .mainHeader {
   padding: 1rem;
   background-color: var(--white);
@@ -12,6 +14,12 @@
   font-weight: 700;
 }
 
-.mainHeader__icon {
+.mainHeader__linkIcon {
   font-size: 24px;
 }
+
+.mainHeader__linkText {
+  @include mixins.sr-only;
+}
+
+

@@ -147,8 +147,17 @@ body {
   font-weight: 700;
 }
 
-.mainHeader__icon {
+.mainHeader__linkIcon {
   font-size: 24px;
+}
+
+.mainHeader__linkText {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=main.css.map */
