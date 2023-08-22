@@ -133,4 +133,22 @@ body {
   overflow: hidden;
 }
 
+.mainHeader {
+  padding: 1rem;
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.mainHeader__title {
+  color: var(--black);
+  font-weight: 700;
+}
+
+.mainHeader__icon {
+  font-size: 24px;
+}
+
 /*# sourceMappingURL=main.css.map */
