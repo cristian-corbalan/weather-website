@@ -124,4 +124,13 @@ body {
   background-color: var(--white);
 }
 
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=main.css.map */
