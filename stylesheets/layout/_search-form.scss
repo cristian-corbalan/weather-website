@@ -1,0 +1,79 @@
+@use '../abstract/_mixins';
+
+.searcher {
+  background-color: var(--white);
+  box-shadow: 0 -4px 4px 0 rgba(0, 0, 0, 0.25);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  z-index: 10;
+
+  @include mixins.for-size(tablet-up){
+    position: static;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(#333333, .2);
+  }
+}
+
+.searcher__form{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @include mixins.for-size(tablet-up){
+    flex-wrap: nowrap;
+    align-items: end;
+  }
+}
+
+.searcher__div{
+  width: 100%;
+  @include mixins.for-size(tablet-up){
+    flex: 1 0 0;
+  }
+}
+
+.searcher__label{
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.searcher__input{
+  border: 1px solid rgba(#333333, .6);
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  width: 100%;
+}
+
+.searcher__button{
+  padding: .5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: flex;
+  flex: 1 0 0;
+  order: 3;
+
+  border-radius: 5px;
+  background: #EA724F;
+
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.searcher__button--currentLocation {
+  flex: 0 0 0;
+  background: #385BEB;
+  order: 2;
+
+  @include mixins.for-size(tablet-up){
+    order: 3;
+  }
+}
+
+.searcher__button .bx {
+  font-size: 24px;
+}

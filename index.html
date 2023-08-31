@@ -26,7 +26,21 @@
 
     <!--Main-->
     <main>
-
+        <!--Search form-->
+        <header class="searcher">
+            <form class="searcher__form" action="#">
+                <div class="searcher__div">
+                    <label class="searcher__label" for="searchInput">Country or city</label>
+                    <input class="searcher__input" type="search" name="searchInput" id="searchInput"
+                           placeholder="E.g.: Argentina">
+                </div>
+                <button class="searcher__button searcher__button--search" type="submit">Search <span class='bx bx-search-alt-2'></span></button>
+                <button class="searcher__button searcher__button--currentLocation" type="button">
+                    <span class='bx bx-current-location'></span>
+                    <span class="sr-only">Use my current location</span>
+                </button>
+            </form>
+        </header>
     </main>
 
     <!--Footer-->
