@@ -1,0 +1,21 @@
+@use '../abstract/mixins';
+
+.weatherLocation{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weatherLocation__name{
+  flex: 1 0 0;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: bold;
+  @include mixins.for-size(tablet-up){
+    order: 2;
+  }
+}
+
+.weatherLocation__iconContainer{
+  max-width: 100px;
+}

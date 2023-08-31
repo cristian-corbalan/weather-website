@@ -246,4 +246,26 @@ body {
   padding: 1rem;
 }
 
+.weatherLocation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weatherLocation__name {
+  flex: 1 0 0;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+@media (min-width: 768px) {
+  .weatherLocation__name {
+    order: 2;
+  }
+}
+
+.weatherLocation__iconContainer {
+  max-width: 100px;
+}
+
 /*# sourceMappingURL=main.css.map */
