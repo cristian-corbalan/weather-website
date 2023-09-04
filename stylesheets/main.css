@@ -247,6 +247,14 @@ body {
 }
 
 .weatherLocation {
+  margin-bottom: 1.5rem;
+}
+
+.temperature {
+  margin-bottom: 2rem;
+}
+
+.weatherLocation {
   display: flex;
   align-items: center;
   gap: 1rem;
