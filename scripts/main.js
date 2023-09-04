@@ -102,6 +102,39 @@ const showWeather = (location = null, info = null) => {
     let realFeel = document.querySelector('#mainTemperature .temperature__item:last-child .temperature__degrees');
     temperature.innerText = `${info.main.temp}ºc`;
     realFeel.innerText = `${info.main.feels_like}ºc`;
+
+    // Other info:
+    let list = document.getElementById('weatherInfoList');
+    list.innerText = '';
+
+    list.append(createWeatherInfoItem());
+}
+
+
+/**
+ * Create a list item with two spans, one span for name and the other the value.
+ *
+ *
+ * @param {string} name Data name
+ * @param {string} value Data value
+ * @return {string|HTMLElement} The list item
+ */
+const createWeatherInfoItem = (name = null, value = '') => {
+    if (!name) {
+        return 'Error: The data name is required';
+    }
+
+    let li = createTag('li', {class: 'weatherInfo__item'});
+
+    let spanName = createTag('span', {class: 'weatherInfo__name'}, name);
+    li.appendChild(spanName);
+
+    if(value){
+        let spanValue = createTag('span', {class: 'weatherInfo__value'}, value);
+        li.appendChild(spanValue);
+    }
+
+    return li;
 }
 
 
