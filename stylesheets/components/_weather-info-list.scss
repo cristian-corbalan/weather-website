@@ -1,0 +1,29 @@
+@use '../abstract/mixins';
+
+
+.weatherInfo{
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.for-size(tablet-up){
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.weatherInfo__item{
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(#333333, 0.70);
+
+  @include mixins.for-size(tablet-up){
+    width: 48%;
+  }
+}
+
+.weatherInfo__name{
+  font-weight: bold;
+}
