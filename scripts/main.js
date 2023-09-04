@@ -19,6 +19,10 @@ const search = async (e) => {
         console.info('The location is', coordinates[0]);
 
         let url = getWeatherURL(coordinates[0]);
+
+        let info = await getWeather(url);
+
+        console.info('Weather:', info);
     }
 }
 
@@ -51,6 +55,17 @@ const getWeatherURL = function (coordinates) {
     // console.info(lat, lon);
 
     return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+}
+
+/**
+ * Get the weather information of a location.
+ *
+ * @param {string} url API URL with the coordinates.
+ * @return {Promise}
+ */
+const getWeather = (url) => {
+    return fetch(url)
+        .then(response => response.json());
 }
 
 
