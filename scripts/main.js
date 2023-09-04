@@ -100,14 +100,19 @@ const showWeather = (location = null, info = null) => {
     // Temperature
     let temperature = document.querySelector('#mainTemperature .temperature__item:first-child .temperature__degrees');
     let realFeel = document.querySelector('#mainTemperature .temperature__item:last-child .temperature__degrees');
-    temperature.innerText = `${info.main.temp}ºc`;
-    realFeel.innerText = `${info.main.feels_like}ºc`;
+    temperature.innerText = `${Math.round(info.main.temp)}ºc`;
+    realFeel.innerText = `${Math.round(info.main.feels_like)}ºc`;
 
     // Other info:
     let list = document.getElementById('weatherInfoList');
     list.innerText = '';
 
-    list.append(createWeatherInfoItem());
+    list.append(createWeatherInfoItem('Minimum temperature', `${Math.round(info.main.temp_min)} ºc`));
+    list.append(createWeatherInfoItem('Maximum temperature', `${Math.round(info.main.temp_max)} ºc`));
+    list.append(createWeatherInfoItem('Humidity', `${info.main.humidity} %`));
+    list.append(createWeatherInfoItem('Visibility', `${info.visibility / 1000} Km`));
+    list.append(createWeatherInfoItem('Wind speed', `${(info.wind.speed * 3.6).toFixed(1)} Km/h`));
+    list.append(createWeatherInfoItem('Pressure', `${info.main.pressure} hPa`));
 }
 
 
