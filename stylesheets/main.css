@@ -251,7 +251,7 @@ body {
 }
 
 .temperature {
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
 }
 
 .weatherLocation {
@@ -274,6 +274,10 @@ body {
 
 .weatherLocation__iconContainer {
   max-width: 100px;
+}
+
+.temperature {
+  max-width: 328px;
 }
 
 .temperature__list {
