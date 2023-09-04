@@ -7,22 +7,28 @@ const search = async (e) => {
 
     let value = document.getElementById('searchInput').value;
 
-    console.info('The value to search is:', value);
+    // console.info('The value to search is:', value);
 
     let coordinates = await getCoordinates(value);
 
     if (coordinates.cod === '400') {
-        console.warn( coordinates.message);
+        console.warn(coordinates.message);
     } else if (!coordinates.length) {
         console.warn('Location not found');
     } else {
-        console.info('The location is', coordinates[0]);
+        // console.info('The location is', coordinates[0]);
 
         let url = getWeatherURL(coordinates[0]);
 
         let info = await getWeather(url);
+        // console.info('Weather:', info);
 
-        console.info('Weather:', info);
+        let location = {
+            name: coordinates[0].name,
+            state: coordinates[0].state,
+        }
+
+        showWeather(location, info);
     }
 }
 
@@ -66,6 +72,36 @@ const getWeatherURL = function (coordinates) {
 const getWeather = (url) => {
     return fetch(url)
         .then(response => response.json());
+}
+
+/**
+ *
+ * @param {Object} location
+ * @param {Object} info
+ * @return {{success: boolean, message: string}|void}
+ */
+const showWeather = (location = null, info = null) => {
+    if (!location || !info) {
+        return {
+            success: false,
+            message: 'The city name, state name and the weather info are required',
+        }
+    }
+
+    // Name:
+    let name = document.getElementById('locationName');
+    name.innerText = `${location.state}, ${location.name}`;
+
+    // Icon:
+    let img = document.getElementById('weatherIcon');
+    img.setAttribute('src', `https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`)
+    img.setAttribute('alt', info.weather[0].description)
+
+    // Temperature
+    let temperature = document.querySelector('#mainTemperature .temperature__item:first-child .temperature__degrees');
+    let realFeel = document.querySelector('#mainTemperature .temperature__item:last-child .temperature__degrees');
+    temperature.innerText = `${info.main.temp}ºc`;
+    realFeel.innerText = `${info.main.feels_like}ºc`;
 }
 
 
