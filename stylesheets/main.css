@@ -1,10 +1,12 @@
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 /* Custom properties */
 :root {
   /* Colors */
   --black: #333333;
   --white: #fefefe;
   /* Typography */
-  --font-principal: Helvetica, Arial, sans-serif;
+  --font-principal: "Montserrat", Helvetica, Arial, sans-serif;
   --font-secundary: Verdana;
 }
 
