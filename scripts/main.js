@@ -10,9 +10,14 @@ const search = async (e) => {
     console.info('The value to search is:', value);
 
     let coordinates = await getCoordinates(value);
-    console.log(coordinates);
 
-
+    if (coordinates.cod === '400') {
+        console.warn( coordinates.message);
+    } else if (!coordinates.length) {
+        console.warn('Location not found');
+    } else {
+        console.info('The location is', coordinates[0])
+    }
 }
 
 // ---------- Functions:
@@ -39,7 +44,7 @@ const getCoordinates = (location) => {
  */
 const createTag = function (name = '', attributes = null, content = null) {
     if (!name) {
-        console.error("The name is obligatory");
+        console.error('The name is obligatory');
     }
 
     let tag = document.createElement(name);
