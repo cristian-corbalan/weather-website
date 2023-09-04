@@ -16,7 +16,9 @@ const search = async (e) => {
     } else if (!coordinates.length) {
         console.warn('Location not found');
     } else {
-        console.info('The location is', coordinates[0])
+        console.info('The location is', coordinates[0]);
+
+        let url = getWeatherURL(coordinates[0]);
     }
 }
 
@@ -32,6 +34,23 @@ const getCoordinates = (location) => {
 
     return fetch(COORDINATES_API)
         .then(res => res.json());
+}
+
+
+/**
+ * Create the URL of the weather API using the latitude and longitude.
+ *
+ * @param {Object} coordinates
+ * @param {Number} coordinates.lat
+ * @param {Number} coordinates.lon
+ * @return {string} Weather API URL.
+ */
+const getWeatherURL = function (coordinates) {
+    let lat = coordinates.lat;
+    let lon = coordinates.lon;
+    // console.info(lat, lon);
+
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
 }
 
 
