@@ -22,7 +22,7 @@
 }
 
 /* Sharp contrast */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   :root {
     --black: #000000;
     --white: #ffffff;
