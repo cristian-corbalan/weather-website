@@ -9,10 +9,10 @@ const search = async (e) => {
 
     console.info('The value to search is:', value);
 
-    // console.info('Searching...');
-
     let coordinates = await getCoordinates(value);
     console.log(coordinates);
+
+
 }
 
 // ---------- Functions:
@@ -27,6 +27,34 @@ const getCoordinates = (location) => {
 
     return fetch(COORDINATES_API)
         .then(res => res.json());
+}
+
+
+/**
+ * Create a HTMLElement
+ *
+ * @param {string} name Tag's name.
+ * @param {object | null} attributes The object's properties are the attribute name.
+ * @param {string | null} content Tag's innerText.
+ */
+const createTag = function (name = '', attributes = null, content = null) {
+    if (!name) {
+        console.error("The name is obligatory");
+    }
+
+    let tag = document.createElement(name);
+
+    if (attributes) {
+        for (const i in attributes) {
+            tag.setAttribute(i, attributes[i]);
+        }
+    }
+
+    if (content) {
+        tag.innerText = content;
+    }
+
+    return tag;
 }
 
 // ---------- API variables:
