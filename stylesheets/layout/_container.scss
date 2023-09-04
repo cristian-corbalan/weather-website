@@ -1,0 +1,9 @@
+@use '../abstract/mixins';
+
+.all{
+  padding-bottom: 11rem;
+
+  @include mixins.for-size(tablet-up){
+    padding-bottom: 1rem;
+  }
+}

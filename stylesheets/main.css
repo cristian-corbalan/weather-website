@@ -243,6 +243,15 @@ body {
   font-size: 24px;
 }
 
+.all {
+  padding-bottom: 11rem;
+}
+@media (min-width: 768px) {
+  .all {
+    padding-bottom: 1rem;
+  }
+}
+
 .weather {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 1rem;

@@ -2,6 +2,7 @@
 @use 'base/_classes';
 @use 'layout/_main-header';
 @use 'layout/_search-form';
+@use 'layout/_container';
 
 @use 'layout/weather-info';
 @use 'components/weather-location';
