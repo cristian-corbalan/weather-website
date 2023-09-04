@@ -248,7 +248,7 @@ body {
 }
 @media (min-width: 768px) {
   .all {
-    padding-bottom: 1rem;
+    padding-bottom: 0;
   }
 }
 

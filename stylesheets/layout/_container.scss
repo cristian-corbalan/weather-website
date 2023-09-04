@@ -4,6 +4,6 @@
   padding-bottom: 11rem;
 
   @include mixins.for-size(tablet-up){
-    padding-bottom: 1rem;
+    padding-bottom: 0;
   }
 }
