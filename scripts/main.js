@@ -10,7 +10,11 @@ const search = (e) => {
     // console.info('Searching...');
 }
 
-// Add event to the form:
+// ---------- API variables:
+
+const API_KEY = `1bff7579067727b7399aa930fbeb7b4c`;
+
+// ---------- Add event to the form:
 const searchForm = document.getElementById('searchForm');
 
 searchForm.addEventListener('submit', search);
