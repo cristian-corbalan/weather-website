@@ -140,28 +140,16 @@ body {
   background-attachment: fixed;
 }
 
-body.bg-clear-sky {
-  background-image: url("../../assets/images/weather-backgrounds/clear_sky.jpg");
+body.bg-clear {
+  background-image: url("../../assets/images/weather-backgrounds/clear.jpg");
 }
 
-body.bg-few-clouds {
-  background-image: url("../../assets/images/weather-backgrounds/few_clouds.jpg");
+body.bg-clouds {
+  background-image: url("../../assets/images/weather-backgrounds/clouds.jpg");
 }
 
-body.bg-scattered-clouds {
-  background-image: url("../../assets/images/weather-backgrounds/scattered_clouds.jpg");
-}
-
-body.bg-broken-clouds {
-  background-image: url("../../assets/images/weather-backgrounds/broken_clouds.jpg");
-}
-
-body.bg-shower-rain {
-  background-image: url("../../assets/images/weather-backgrounds/shower_rain.jpg");
-}
-
-body.bg-rain {
-  background-image: url("../../assets/images/weather-backgrounds/rain.jpg");
+body.bg-drizzle {
+  background-image: url("../../assets/images/weather-backgrounds/drizzle.jpg");
 }
 
 body.bg-rain {
@@ -176,7 +164,15 @@ body.bg-snow {
   background-image: url("../../assets/images/weather-backgrounds/snow.jpg");
 }
 
-body.bg-mist {
+body.bg-mist,
+body.bg-smoke,
+body.bg-haze,
+body.bg-dust,
+body.bg-fog,
+body.bg-sand,
+body.bg-ash,
+body.bg-squall,
+body.bg-tornado {
   background-image: url("../../assets/images/weather-backgrounds/mist.jpg");
 }
 
