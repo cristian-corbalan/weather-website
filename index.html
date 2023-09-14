@@ -37,8 +37,16 @@
                     <input class="searcher__input" type="search" name="searchInput" id="searchInput"
                            placeholder="E.g.: Argentina">
                 </div>
-                <button class="searcher__button searcher__button--search" type="submit">Search <span class='bx bx-search-alt-2'></span></button>
-                <button class="searcher__button searcher__button--currentLocation" type="button">
+
+                <button id="buttonSearch"
+                        class="searcher__button searcher__button--search"
+                        type="submit"
+                        disabled>Search <span class='bx bx-search-alt-2'></span></button>
+
+                <button id="buttonCurrentLocation"
+                        class="searcher__button searcher__button--currentLocation"
+                        type="button"
+                        disabled>
                     <span class='bx bx-current-location'></span>
                     <span class="sr-only">Use my current location</span>
                 </button>
@@ -51,7 +59,8 @@
             <header class="weatherLocation">
                 <h2 id="locationName" class="weatherLocation__name">Buenos Aires</h2>
                 <div class="weatherLocation__iconContainer">
-                    <img id="weatherIcon" class="weatherLocation__icon" src="https://openweathermap.org/img/wn/10d@2x.png" alt="Light rain">
+                    <img id="weatherIcon" class="weatherLocation__icon"
+                         src="https://openweathermap.org/img/wn/10d@2x.png" alt="Light rain">
                 </div>
             </header>
 

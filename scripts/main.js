@@ -32,6 +32,12 @@ const search = async (e) => {
     }
 }
 
+const changeFormStatus = (e) => {
+    let value = e.target.value;
+
+    toggleFormButtonsStatus(value);
+}
+
 // ---------- Functions:
 
 /**
@@ -117,7 +123,6 @@ const showWeather = (location = null, info = null) => {
     changeWeatherBackground(info.weather[0].main)
 }
 
-
 /**
  * Create a list item with two spans, one span for name and the other the value.
  *
@@ -143,7 +148,6 @@ const createWeatherInfoItem = (name = null, value = '') => {
 
     return li;
 }
-
 
 /**
  * Create a HTMLElement
@@ -195,6 +199,22 @@ const changeWeatherBackground = (weather = null) => {
     document.body.className = className;
 }
 
+/**
+ * Enable or disable the search form buttons
+ * @param {string} value Input content
+ */
+const toggleFormButtonsStatus = (value = '') => {
+    let buttonSearch = document.getElementById('buttonSearch');
+    let buttonCurrentLocation = document.getElementById('buttonCurrentLocation');
+
+    if(!value !== null && String(value).trim()){
+        buttonSearch.disabled = false;
+        buttonCurrentLocation.disabled = false;
+    }else {
+        buttonSearch.disabled = true;
+        buttonCurrentLocation.disabled = true;
+    }
+}
 
 // ---------- API variables:
 
@@ -203,5 +223,7 @@ const API_KEY = `1bff7579067727b7399aa930fbeb7b4c`;
 // ---------- Add event to the form:
 
 const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
 
 searchForm.addEventListener('submit', search);
+searchInput.addEventListener('input', changeFormStatus);
