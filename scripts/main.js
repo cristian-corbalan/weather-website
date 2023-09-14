@@ -113,6 +113,8 @@ const showWeather = (location = null, info = null) => {
     list.append(createWeatherInfoItem('Visibility', `${info.visibility / 1000} Km`));
     list.append(createWeatherInfoItem('Wind speed', `${(info.wind.speed * 3.6).toFixed(1)} Km/h`));
     list.append(createWeatherInfoItem('Pressure', `${info.main.pressure} hPa`));
+
+    changeWeatherBackground(info.weather[0].main)
 }
 
 
@@ -134,7 +136,7 @@ const createWeatherInfoItem = (name = null, value = '') => {
     let spanName = createTag('span', {class: 'weatherInfo__name'}, name);
     li.appendChild(spanName);
 
-    if(value){
+    if (value) {
         let spanValue = createTag('span', {class: 'weatherInfo__value'}, value);
         li.appendChild(spanValue);
     }
@@ -169,6 +171,30 @@ const createTag = function (name = '', attributes = null, content = null) {
 
     return tag;
 }
+
+/**
+ * Change body background class
+ *
+ * @param {null | string} weather Description of the weather, it can be:
+ *  clear sky | few clouds | scattered clouds | broken clouds | shower rain | rain | thunderstorm | snow | mist
+ */
+const changeWeatherBackground = (weather = null) => {
+    if (!weather) {
+        return "The weather description is required";
+    }
+
+    // Change weather type
+    weather = String(weather);
+
+    // Create class:
+    let className = 'bg-';
+
+    // Change blank spaces to -
+    className += weather.replace(/ /g, '-').toLowerCase();
+
+    document.body.className = className;
+}
+
 
 // ---------- API variables:
 
