@@ -1,12 +1,30 @@
+@use "../abstract/mixins";
+
 .weather{
-  background-color: rgba(#ffffff, .8);
-  padding: 1rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @include mixins.for-size(tablet-up){
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    gap: 1rem;
+  }
 }
 
 .weatherLocation{
   margin-bottom: 1.5rem;
+  @include mixins.for-size(tablet-up){
+    flex: 1 0 0;
+    margin-bottom: 0;
+  }
 }
 
-.temperature{
+#mainTemperature{
   margin: 0 auto 2rem;
 }

@@ -245,6 +245,7 @@ body {
 
 .all {
   padding-bottom: 11rem;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 @media (min-width: 768px) {
   .all {
@@ -265,15 +266,34 @@ body {
 }
 
 .weather {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 1rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .weather {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    gap: 1rem;
+  }
 }
 
 .weatherLocation {
   margin-bottom: 1.5rem;
 }
+@media (min-width: 768px) {
+  .weatherLocation {
+    flex: 1 0 0;
+    margin-bottom: 0;
+  }
+}
 
-.temperature {
+#mainTemperature {
   margin: 0 auto 2rem;
 }
 
@@ -301,6 +321,7 @@ body {
 
 .temperature {
   max-width: 328px;
+  width: 100%;
 }
 
 .temperature__list {
