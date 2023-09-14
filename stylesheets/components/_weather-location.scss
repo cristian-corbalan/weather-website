@@ -13,9 +13,12 @@
   font-weight: bold;
   @include mixins.for-size(tablet-up){
     order: 2;
+    font-size: 1.5rem;
   }
 }
 
 .weatherLocation__iconContainer{
   max-width: 100px;
+  background-color: rgba(#FFFFFF, .8);
+  border-radius: 10px;
 }

@@ -354,7 +354,7 @@ body.bg-tornado {
 @media (min-width: 768px) {
   .weatherLocation {
     flex: 1 0 0;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
   }
 }
 
@@ -377,11 +377,14 @@ body.bg-tornado {
 @media (min-width: 768px) {
   .weatherLocation__name {
     order: 2;
+    font-size: 1.5rem;
   }
 }
 
 .weatherLocation__iconContainer {
   max-width: 100px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
 }
 
 .temperature {
