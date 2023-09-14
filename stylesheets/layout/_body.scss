@@ -1,44 +1,46 @@
+$weather-background-path: '../../assets/images/weather-backgrounds/';
+
 body{
   background-size: cover;
   background-attachment: fixed;
 }
 
 body.bg-clear-sky{
-  background-image: url("../../assets/images/weather-backgrounds/clear_sky.jpg");
+  background-image: url($weather-background-path + "clear_sky.jpg");
 }
 
 body.bg-few-clouds{
-  background-image: url("../../assets/images/weather-backgrounds/few_clouds.jpg");
+  background-image: url($weather-background-path + "few_clouds.jpg");
 }
 
 body.bg-scattered-clouds{
-  background-image: url("../../assets/images/weather-backgrounds/scattered_clouds.jpg");
+  background-image: url($weather-background-path + "scattered_clouds.jpg");
 }
 
 body.bg-broken-clouds{
-  background-image: url("../../assets/images/weather-backgrounds/broken_clouds.jpg");
+  background-image: url($weather-background-path + "broken_clouds.jpg");
 }
 
 body.bg-shower-rain{
-  background-image: url("../../assets/images/weather-backgrounds/shower_rain.jpg");
+  background-image: url($weather-background-path + "shower_rain.jpg");
 }
 
 body.bg-rain{
-  background-image: url("../../assets/images/weather-backgrounds/rain.jpg");
+  background-image: url($weather-background-path + "rain.jpg");
 }
 
 body.bg-rain{
-  background-image: url("../../assets/images/weather-backgrounds/rain.jpg");
+  background-image: url($weather-background-path + "rain.jpg");
 }
 
 body.bg-thunderstorm{
-  background-image: url("../../assets/images/weather-backgrounds/thunderstorm.jpg");
+  background-image: url($weather-background-path + "thunderstorm.jpg");
 }
 
 body.bg-snow{
-  background-image: url("../../assets/images/weather-backgrounds/snow.jpg");
+  background-image: url($weather-background-path + "snow.jpg");
 }
 
 body.bg-mist{
-  background-image: url("../../assets/images/weather-backgrounds/mist.jpg");
+  background-image: url($weather-background-path + "mist.jpg");
 }
