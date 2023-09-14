@@ -70,6 +70,14 @@
   }
 }
 
+.searcher__button:disabled{
+  opacity: .5;
+  @include mixins.on-event(){
+    background-color: #EA724F;
+    cursor: auto;
+  }
+}
+
 .searcher__button--currentLocation {
   flex: 0 0 0;
   background: #385BEB;
@@ -81,7 +89,14 @@
 
   @include mixins.on-event(){
     background-color: #6A85F0;
-    cursor: pointer;
+  }
+}
+
+.searcher__button--currentLocation:disabled{
+  opacity: .5;
+  @include mixins.on-event(){
+    background-color: #385BEB;
+    cursor: auto;
   }
 }
 

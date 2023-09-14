@@ -274,6 +274,14 @@ body.bg-tornado {
   cursor: pointer;
 }
 
+.searcher__button:disabled {
+  opacity: 0.5;
+}
+.searcher__button:disabled:hover, .searcher__button:disabled:active, .searcher__button:disabled:focus {
+  background-color: #EA724F;
+  cursor: auto;
+}
+
 .searcher__button--currentLocation {
   flex: 0 0 0;
   background: #385BEB;
@@ -286,7 +294,14 @@ body.bg-tornado {
 }
 .searcher__button--currentLocation:hover, .searcher__button--currentLocation:active, .searcher__button--currentLocation:focus {
   background-color: #6A85F0;
-  cursor: pointer;
+}
+
+.searcher__button--currentLocation:disabled {
+  opacity: 0.5;
+}
+.searcher__button--currentLocation:disabled:hover, .searcher__button--currentLocation:disabled:active, .searcher__button--currentLocation:disabled:focus {
+  background-color: #385BEB;
+  cursor: auto;
 }
 
 .searcher__button .bx {
