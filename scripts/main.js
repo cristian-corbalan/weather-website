@@ -3,6 +3,7 @@
 // -------------------- Event functions:
 
 const search = async (e) => {
+    console.log("buscando...")
     e.preventDefault()
 
     let value = document.getElementById('searchInput').value;
@@ -94,38 +95,159 @@ const showWeather = (location = null, info = null) => {
         }
     }
 
-    // Name:
-    let name = document.getElementById('locationName');
-    name.innerText = `${location.state}, ${location.name}`;
+    if (!document.querySelector('.weather')) {
+        return {
+            success: false,
+            message: 'In the HTML is necessary a tag with the class "weather" to add the content',
+        }
+    }
 
-    // Icon:
-    let img = document.getElementById('weatherIcon');
-    img.setAttribute('src', `https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`)
-    img.setAttribute('alt', info.weather[0].description)
+    let weatherContainer = document.querySelector('.weather');
+    weatherContainer.innerText = '';
 
-    // Temperature
-    let temperature = document.querySelector('#mainTemperature .temperature__item:first-child .temperature__degrees');
-    let realFeel = document.querySelector('#mainTemperature .temperature__item:last-child .temperature__degrees');
-    temperature.innerText = `${Math.round(info.main.temp)}ºc`;
-    realFeel.innerText = `${Math.round(info.main.feels_like)}ºc`;
+    let header = createWeatherHeader(
+        location.state,
+        location.name,
+        info.weather[0].icon,
+        info.weather[0].description
+    );
+    weatherContainer.appendChild(header);
 
-    // Other info:
-    let list = document.getElementById('weatherInfoList');
-    list.innerText = '';
+    let temperature = createWeatherTemperature(info.main.temp, info.main.feels_like);
+    temperature.setAttribute('id', 'mainTemperature');
+    weatherContainer.appendChild(temperature);
 
-    list.append(createWeatherInfoItem('Minimum temperature', `${Math.round(info.main.temp_min)} ºc`));
-    list.append(createWeatherInfoItem('Maximum temperature', `${Math.round(info.main.temp_max)} ºc`));
-    list.append(createWeatherInfoItem('Humidity', `${info.main.humidity} %`));
-    list.append(createWeatherInfoItem('Visibility', `${info.visibility / 1000} Km`));
-    list.append(createWeatherInfoItem('Wind speed', `${(info.wind.speed * 3.6).toFixed(1)} Km/h`));
-    list.append(createWeatherInfoItem('Pressure', `${info.main.pressure} hPa`));
+    let moreInformation = {
+        'Minimum temperature': `${Math.round(info.main.temp_min)} ºc`,
+        'Maximum temperature': `${Math.round(info.main.temp_max)} ºc`,
+        'Humidity': `${info.main.humidity} %`,
+        'Visibility': `${info.visibility / 1000} Km`,
+        'Wind speed': `${(info.wind.speed * 3.6).toFixed(1)} Km/h`,
+        'Pressure': `${info.main.pressure} hPa`,
+    }
+
+    let list = createWeatherInfoList(moreInformation);
+    weatherContainer.appendChild(list);
 
     changeWeatherBackground(info.weather[0].main)
 }
 
 /**
- * Create a list item with two spans, one span for name and the other the value.
+ * Create a weather header with the searched location name and the icon.
+ * The structure is commented within the function.
  *
+ * @param {string} state
+ * @param {string} city
+ * @param {string} icon Only the code
+ * @param {string} description Weather description, for the img alt
+ * @return {HTMLElement} The header with the class "weatherLocation"
+ */
+const createWeatherHeader = (state = '', city = '', icon = '', description = '') => {
+    /*
+    Structure:
+        <header class="weatherLocation">
+            <h2 class="weatherLocation__name">STATE, CITY</h2>
+            <div class="weatherLocation__iconContainer">
+                <img class="weatherLocation__icon"
+                     src="ICON_URL"
+                     alt="DESCRIPTION">
+            </div>
+        </header>
+     */
+
+    let header = createTag('header', {class: 'weatherLocation'});
+
+    let h2 = createTag('h2', {class: 'weatherLocation__name'}, `${state}, ${city}`);
+    header.appendChild(h2);
+
+    let div = createTag('div', {class: 'weatherLocation__iconContainer'});
+    header.appendChild(div);
+
+    let img = createTag(
+        'img',
+        {
+            class: 'weatherLocation__icon',
+            src: `https://openweathermap.org/img/wn/${icon}@2x.png`,
+            alt: description
+        }
+    );
+    div.appendChild(img);
+
+    return header;
+}
+
+/**
+ * Create a weather temperature.
+ * The structure is commented within the function.
+ *
+ * @param {number | string} temperature
+ * @param {number | string} realFeel
+ * @return {HTMLElement} The div with the class "temperature".
+ */
+const createWeatherTemperature = (temperature = 0, realFeel = 0) => {
+
+    /*
+    Structure:
+
+    <div class="temperature">
+        <ul class="temperature__list">
+            <li class="temperature__item">
+                <span class="temperature__name">Temperature</span>
+                <span class="temperature__degrees">00ºc</span>
+            </li>
+            <li class="temperature__item">
+                <span class="temperature__name">Real feel</span>
+                <span class="temperature__degrees">00ºc</span>
+            </li>
+        </ul>
+    </div>
+     */
+
+    let div = createTag('div', {class: 'temperature'});
+
+    let ul = createTag('ul', {class: 'temperature__list'});
+    div.appendChild(ul);
+
+    let li = createTag('li', {class: 'temperature__item'});
+    ul.appendChild(li);
+
+    let span = createTag('span', {class: 'temperature__name'}, 'Temperature');
+    li.appendChild(span);
+
+    span = createTag('span', {class: 'temperature__degrees'}, `${Math.round(temperature)}ºc`);
+    li.appendChild(span);
+
+    li = createTag('li', {class: 'temperature__item'});
+    ul.appendChild(li);
+
+    span = createTag('span', {class: 'temperature__name'}, 'Real feel');
+    li.appendChild(span);
+
+    span = createTag('span', {class: 'temperature__degrees'}, `${Math.round(realFeel)}ºc`);
+    li.appendChild(span);
+
+    return div;
+}
+
+
+/**
+ * Create weather info list.
+ *
+ * @param {{}} info Object with the information to list
+ * @return {HTMLElement} The ul with the class "weatherInfo"
+ */
+const createWeatherInfoList = (info = {}) => {
+    let ul = createTag('ul', {class: 'weatherInfo'})
+
+    for (const name in info) {
+        ul.appendChild(createWeatherInfoItem(name, info[name]));
+    }
+
+    return ul;
+}
+
+/**
+ * Create a list item with two spans, one span for name and the other the value.
  *
  * @param {string} name Data name
  * @param {string} value Data value
@@ -207,10 +329,10 @@ const toggleFormButtonsStatus = (value = '') => {
     let buttonSearch = document.getElementById('buttonSearch');
     let buttonCurrentLocation = document.getElementById('buttonCurrentLocation');
 
-    if(!value !== null && String(value).trim()){
+    if (!value !== null && String(value).trim()) {
         buttonSearch.disabled = false;
         buttonCurrentLocation.disabled = false;
-    }else {
+    } else {
         buttonSearch.disabled = true;
         buttonCurrentLocation.disabled = true;
     }
