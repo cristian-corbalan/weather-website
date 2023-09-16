@@ -30,6 +30,8 @@ const search = async (e) => {
         }
 
         showWeather(location, info);
+
+        saveOnHistory(coordinates[0]);
     }
 }
 
@@ -337,6 +339,34 @@ const toggleFormButtonsStatus = (value = '') => {
         buttonCurrentLocation.disabled = true;
     }
 }
+
+
+const saveOnHistory = (searchedLocation) => {
+    console.log(searchedLocation);
+
+    let history = localStorage.getItem('searchedHistory');
+
+    if (history) {
+        history = JSON.parse(history);
+
+        let notExist = true;
+
+        history.forEach((location, i) => {
+            if(location.lat === searchedLocation.lat && location.lon === searchedLocation.lon){
+                notExist = false;
+                history.splice(i, 1);
+                history.push(searchedLocation);
+            }
+        })
+
+        if(notExist){
+            history.push(searchedLocation);
+        }
+
+        localStorage.setItem('searchedHistory', JSON.stringify(history));
+    }
+}
+
 
 // ---------- API variables:
 
