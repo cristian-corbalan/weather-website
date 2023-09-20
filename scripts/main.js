@@ -159,7 +159,7 @@ const createWeatherHeader = (state = '', city = '', icon = '', description = '')
 
     let header = createTag('header', {class: 'weatherLocation'});
 
-    let h2 = createTag('h2', {class: 'weatherLocation__name'}, `${state}, ${city}`);
+    let h2 = createTag('h2', {class: 'weatherLocation__name'}, `${state ? state + ', ' : ''}${city}`);
     header.appendChild(h2);
 
     let div = createTag('div', {class: 'weatherLocation__iconContainer'});
