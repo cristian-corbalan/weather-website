@@ -144,7 +144,7 @@ const showWeather = (location = null, info = null) => {
  * @param {string} description Weather description, for the img alt
  * @return {HTMLElement} The header with the class "weatherLocation"
  */
-const createWeatherHeader = (state = '', city = '', icon = '', description = '') => {
+const createWeatherHeader = (state = '', city = '', icon = '', description = '', tagName = 'h2') => {
     /*
     Structure:
         <header class="weatherLocation">
@@ -159,7 +159,7 @@ const createWeatherHeader = (state = '', city = '', icon = '', description = '')
 
     let header = createTag('header', {class: 'weatherLocation'});
 
-    let h2 = createTag('h2', {class: 'weatherLocation__name'}, `${state ? state + ', ' : ''}${city}`);
+    let h2 = createTag(tagName, {class: 'weatherLocation__name'}, `${state ? state + ', ' : ''}${city}`);
     header.appendChild(h2);
 
     let div = createTag('div', {class: 'weatherLocation__iconContainer'});
@@ -372,6 +372,61 @@ const saveOnHistory = (searchedLocation) => {
     localStorage.setItem('searchedHistory', JSON.stringify(history));
 }
 
+const showHistory = () => {
+    let history = localStorage.getItem('searchedHistory');
+
+    // If I don't have anything in the history, finish the function.
+    if(!history){
+        console.info('The history is empty');
+        return;
+    }
+
+    history = JSON.parse(history);
+
+    // Detect the history container tag and remove its content:
+    let list = document.querySelector('.historyList');
+    console.log("The history list tag", list)
+    list.innerHTML = '';
+
+    history.forEach(async (location) => {
+        console.log("The location is:", location);
+
+        let url = getWeatherURL(location);
+        console.log("The API URL:", url);
+
+        let info = await getWeather(url);
+        console.log("The location weather:", info);
+
+        let li = createHistoryItem(location, info);
+        list.appendChild(li);
+    })
+}
+
+const createHistoryItem = (location = null, info = null) => {
+
+    // Validate the location and weather information:
+    if(!location || !info){
+        console.warn("The city name, state name and the weather info are required");
+        return;
+    }
+
+    let li = createTag('li', {class: 'historyList__item'});
+
+    let header = createWeatherHeader(
+        location.state,
+        location.name,
+        info.weather[0].icon,
+        info.weather[0].description,
+        'h3'
+    )
+    li.appendChild(header);
+
+    let temperature = createWeatherTemperature(info.main.temp, info.main.feels_like);
+    li.appendChild(temperature);
+
+    return li;
+}
+
 
 // ---------- API variables:
 
@@ -384,3 +439,8 @@ const searchInput = document.getElementById('searchInput');
 
 searchForm.addEventListener('submit', search);
 searchInput.addEventListener('input', changeFormStatus);
+
+
+// ---------- History:
+
+showHistory()
