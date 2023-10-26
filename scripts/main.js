@@ -345,7 +345,7 @@ const toggleFormButtonsStatus = (value = '') => {
  * @param {{name, state, lat, lon}} searchedLocation Object with the location's data
  */
 const saveOnHistory = (searchedLocation) => {
-    console.log(searchedLocation);
+    console.log("searched location is:", searchedLocation);
 
     let history = localStorage.getItem('searchedHistory');
 
@@ -365,9 +365,11 @@ const saveOnHistory = (searchedLocation) => {
         if(notExist){
             history.push(searchedLocation);
         }
-
-        localStorage.setItem('searchedHistory', JSON.stringify(history));
+    }else {
+        history = [searchedLocation];
     }
+
+    localStorage.setItem('searchedHistory', JSON.stringify(history));
 }
 
 
