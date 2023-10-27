@@ -369,6 +369,11 @@ const saveOnHistory = (searchedLocation) => {
         history = [searchedLocation];
     }
 
+
+    if(history.length > 5){
+        history.shift();
+    }
+
     localStorage.setItem('searchedHistory', JSON.stringify(history));
 }
 
