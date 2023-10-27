@@ -414,6 +414,13 @@ const createHistoryItem = (location = null, info = null) => {
 
     let li = createTag('li', {class: 'historyList__item'});
 
+    let a = createTag('a', {class: 'historyList__link', href: '#', title: `Search for more information about the weather in ${location.name}`});
+    li.appendChild(a);
+    a.addEventListener('click', (e) => {
+        e.preventDefault();
+        showWeather(location, info)
+    })
+
     let header = createWeatherHeader(
         location.state,
         location.name,
@@ -421,10 +428,10 @@ const createHistoryItem = (location = null, info = null) => {
         info.weather[0].description,
         'h3'
     )
-    li.appendChild(header);
+    a.appendChild(header);
 
     let temperature = createWeatherTemperature(info.main.temp, info.main.feels_like);
-    li.appendChild(temperature);
+    a.appendChild(temperature);
 
     return li;
 }
