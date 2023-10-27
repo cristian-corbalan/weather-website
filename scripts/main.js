@@ -377,6 +377,9 @@ const saveOnHistory = (searchedLocation) => {
     localStorage.setItem('searchedHistory', JSON.stringify(history));
 }
 
+/**
+ * Show the last five locations searched by the user.
+ */
 const showHistory = () => {
     let history = localStorage.getItem('searchedHistory');
 
@@ -404,6 +407,12 @@ const showHistory = () => {
     })
 }
 
+/**
+ * Create a list item with the weather information of a location
+ * @param {Object} location
+ * @param {Object} info
+ * @return {HTMLElement || void} li
+ */
 const createHistoryItem = (location = null, info = null) => {
 
     // Validate the location and weather information:
@@ -439,9 +448,15 @@ const createHistoryItem = (location = null, info = null) => {
     return li;
 }
 
+/**
+ * Update the historyList in the HTML, remove the li with the data-location equal to locationName or without this attribute.
+ * Add a tag to the start of the historyList.
+ * @param {HTMLElement} li
+ * @param {string} locationName
+ */
 const updateHistoryList = (li, locationName) => {
     let list = document.querySelector('.historyList');
-    
+
     for (const child of list.children) {
         if (child.getAttribute('data-location') === locationName || !child.hasAttribute('data-location')) {
             child.remove();
