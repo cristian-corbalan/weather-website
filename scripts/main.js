@@ -347,8 +347,6 @@ const toggleFormButtonsStatus = (value = '') => {
  * @param {{name, state, lat, lon}} searchedLocation Object with the location's data
  */
 const saveOnHistory = (searchedLocation) => {
-    console.log("searched location is:", searchedLocation);
-
     let history = localStorage.getItem('searchedHistory');
 
     if (history) {
@@ -394,17 +392,12 @@ const showHistory = () => {
 
     // Detect the history container tag and remove its content:
     let list = document.querySelector('.historyList');
-    console.log("The history list tag", list)
     list.innerHTML = '';
 
     history.forEach(async (location) => {
-        console.log("The location is:", location);
-
         let url = getWeatherURL(location);
-        console.log("The API URL:", url);
 
         let info = await getWeather(url);
-        console.log("The location weather:", info);
 
         let li = createHistoryItem(location, info);
         list.appendChild(li);
@@ -424,7 +417,6 @@ const createHistoryItem = (location = null, info = null) => {
     let a = createTag('a', {class: 'historyList__link', href: '#', title: `Search for more information about the weather in ${location.name}`});
     li.appendChild(a);
     a.addEventListener('click', (e) => {
-        e.preventDefault();
         showWeather(location, info)
     })
 
