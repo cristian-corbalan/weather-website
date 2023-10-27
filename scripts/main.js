@@ -378,6 +378,8 @@ const showHistory = () => {
     // If I don't have anything in the history, finish the function.
     if(!history){
         console.info('The history is empty');
+        let li = createTag('li', {class: 'history__text'}, 'You haven\'t searched for anything yet. 🥲');
+        document.querySelector('.historyList').appendChild(li);
         return;
     }
 
