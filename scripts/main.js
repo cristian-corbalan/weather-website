@@ -32,6 +32,8 @@ const search = async (e) => {
         showWeather(location, info);
 
         saveOnHistory(coordinates[0]);
+
+        updateHistoryList(createHistoryItem(location, info), location.name);
     }
 }
 
@@ -417,7 +419,7 @@ const createHistoryItem = (location = null, info = null) => {
         return;
     }
 
-    let li = createTag('li', {class: 'historyList__item'});
+    let li = createTag('li', {class: 'historyList__item', 'data-location': location.name});
 
     let a = createTag('a', {class: 'historyList__link', href: '#', title: `Search for more information about the weather in ${location.name}`});
     li.appendChild(a);
@@ -441,6 +443,18 @@ const createHistoryItem = (location = null, info = null) => {
     return li;
 }
 
+const updateHistoryList = (li, locationName) => {
+    let list = document.querySelector('.historyList');
+
+    for (const child of list.children) {
+        if(child.getAttribute('data-location') === locationName){
+            child.remove();
+            break;
+        }
+    }
+
+    list.prepend(li);
+}
 
 // ---------- API variables:
 
