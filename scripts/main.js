@@ -30,6 +30,10 @@ const search = async (e) => {
         }
 
         showWeather(location, info);
+
+        saveOnHistory(coordinates[0]);
+
+        updateHistoryList(createHistoryItem(location, info), location.name);
     }
 }
 
@@ -142,7 +146,7 @@ const showWeather = (location = null, info = null) => {
  * @param {string} description Weather description, for the img alt
  * @return {HTMLElement} The header with the class "weatherLocation"
  */
-const createWeatherHeader = (state = '', city = '', icon = '', description = '') => {
+const createWeatherHeader = (state = '', city = '', icon = '', description = '', tagName = 'h2') => {
     /*
     Structure:
         <header class="weatherLocation">
@@ -157,7 +161,7 @@ const createWeatherHeader = (state = '', city = '', icon = '', description = '')
 
     let header = createTag('header', {class: 'weatherLocation'});
 
-    let h2 = createTag('h2', {class: 'weatherLocation__name'}, `${state}, ${city}`);
+    let h2 = createTag(tagName, {class: 'weatherLocation__name'}, `${state ? state + ', ' : ''}${city}`);
     header.appendChild(h2);
 
     let div = createTag('div', {class: 'weatherLocation__iconContainer'});
@@ -338,6 +342,131 @@ const toggleFormButtonsStatus = (value = '') => {
     }
 }
 
+/**
+ * Save on localStorage a searchedLocation
+ * @param {{name, state, lat, lon}} searchedLocation Object with the location's data
+ */
+const saveOnHistory = (searchedLocation) => {
+    let history = localStorage.getItem('searchedHistory');
+
+    if (history) {
+        history = JSON.parse(history);
+
+        let notExist = true;
+
+        history.forEach((location, i) => {
+            if (location.lat === searchedLocation.lat && location.lon === searchedLocation.lon) {
+                notExist = false;
+                history.splice(i, 1);
+                history.push(searchedLocation);
+            }
+        })
+
+        if (notExist) {
+            history.push(searchedLocation);
+        }
+    } else {
+        history = [searchedLocation];
+    }
+
+
+    if (history.length > 5) {
+        history.shift();
+    }
+
+    localStorage.setItem('searchedHistory', JSON.stringify(history));
+}
+
+/**
+ * Show the last five locations searched by the user.
+ */
+const showHistory = () => {
+    let history = localStorage.getItem('searchedHistory');
+
+    // If I don't have anything in the history, finish the function.
+    if (!history) {
+        console.info('The history is empty');
+        let li = createTag('li', {class: 'history__text'}, 'You haven\'t searched for anything yet. 🥲');
+        document.querySelector('.historyList').appendChild(li);
+        return;
+    }
+
+    history = JSON.parse(history);
+
+    // Detect the history container tag and remove its content:
+    let list = document.querySelector('.historyList');
+    list.innerHTML = '';
+
+    history.forEach(async (location) => {
+        let url = getWeatherURL(location);
+
+        let info = await getWeather(url);
+
+        let li = createHistoryItem(location, info);
+        list.appendChild(li);
+    })
+}
+
+/**
+ * Create a list item with the weather information of a location
+ * @param {Object} location
+ * @param {Object} info
+ * @return {HTMLElement || void} li
+ */
+const createHistoryItem = (location = null, info = null) => {
+
+    // Validate the location and weather information:
+    if (!location || !info) {
+        console.warn("The city name, state name and the weather info are required");
+        return;
+    }
+
+    let li = createTag('li', {class: 'historyList__item', 'data-location': location.name});
+
+    let a = createTag('a', {
+        class: 'historyList__link',
+        href: '#',
+        title: `Search for more information about the weather in ${location.name}`
+    });
+    li.appendChild(a);
+    a.addEventListener('click', (e) => {
+        showWeather(location, info)
+    })
+
+    let header = createWeatherHeader(
+        location.state,
+        location.name,
+        info.weather[0].icon,
+        info.weather[0].description,
+        'h3'
+    )
+    a.appendChild(header);
+
+    let temperature = createWeatherTemperature(info.main.temp, info.main.feels_like);
+    a.appendChild(temperature);
+
+    return li;
+}
+
+/**
+ * Update the historyList in the HTML, remove the li with the data-location equal to locationName or without this attribute.
+ * Add a tag to the start of the historyList.
+ * @param {HTMLElement} li
+ * @param {string} locationName
+ */
+const updateHistoryList = (li, locationName) => {
+    let list = document.querySelector('.historyList');
+
+    for (const child of list.children) {
+        if (child.getAttribute('data-location') === locationName || !child.hasAttribute('data-location')) {
+            child.remove();
+            break;
+        }
+    }
+
+    list.prepend(li);
+}
+
 // ---------- API variables:
 
 const API_KEY = `1bff7579067727b7399aa930fbeb7b4c`;
@@ -349,3 +478,8 @@ const searchInput = document.getElementById('searchInput');
 
 searchForm.addEventListener('submit', search);
 searchInput.addEventListener('input', changeFormStatus);
+
+
+// ---------- History:
+
+showHistory()
