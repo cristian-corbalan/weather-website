@@ -355,22 +355,22 @@ const saveOnHistory = (searchedLocation) => {
         let notExist = true;
 
         history.forEach((location, i) => {
-            if(location.lat === searchedLocation.lat && location.lon === searchedLocation.lon){
+            if (location.lat === searchedLocation.lat && location.lon === searchedLocation.lon) {
                 notExist = false;
                 history.splice(i, 1);
                 history.push(searchedLocation);
             }
         })
 
-        if(notExist){
+        if (notExist) {
             history.push(searchedLocation);
         }
-    }else {
+    } else {
         history = [searchedLocation];
     }
 
 
-    if(history.length > 5){
+    if (history.length > 5) {
         history.shift();
     }
 
@@ -381,7 +381,7 @@ const showHistory = () => {
     let history = localStorage.getItem('searchedHistory');
 
     // If I don't have anything in the history, finish the function.
-    if(!history){
+    if (!history) {
         console.info('The history is empty');
         let li = createTag('li', {class: 'history__text'}, 'You haven\'t searched for anything yet. 🥲');
         document.querySelector('.historyList').appendChild(li);
@@ -407,14 +407,18 @@ const showHistory = () => {
 const createHistoryItem = (location = null, info = null) => {
 
     // Validate the location and weather information:
-    if(!location || !info){
+    if (!location || !info) {
         console.warn("The city name, state name and the weather info are required");
         return;
     }
 
     let li = createTag('li', {class: 'historyList__item', 'data-location': location.name});
 
-    let a = createTag('a', {class: 'historyList__link', href: '#', title: `Search for more information about the weather in ${location.name}`});
+    let a = createTag('a', {
+        class: 'historyList__link',
+        href: '#',
+        title: `Search for more information about the weather in ${location.name}`
+    });
     li.appendChild(a);
     a.addEventListener('click', (e) => {
         showWeather(location, info)
@@ -437,9 +441,9 @@ const createHistoryItem = (location = null, info = null) => {
 
 const updateHistoryList = (li, locationName) => {
     let list = document.querySelector('.historyList');
-
+    
     for (const child of list.children) {
-        if(child.getAttribute('data-location') === locationName){
+        if (child.getAttribute('data-location') === locationName || !child.hasAttribute('data-location')) {
             child.remove();
             break;
         }
