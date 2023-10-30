@@ -1,0 +1,26 @@
+@use '../abstract/mixins';
+
+.notFound{
+  width: 100%;
+}
+
+.notFound__image{
+  max-height: 284px;
+  aspect-ratio: 328/284;
+  background-image: url("./../assets/images/illustrations/not_found.svg");
+  background-size: cover;
+  background-position: center;
+  margin: auto auto 2rem;
+
+  @include mixins.for-size(tablet-up){
+    max-height: 400px;
+  }
+}
+
+.notFound__text{
+  text-align: center;
+  line-height: 1.6em;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+

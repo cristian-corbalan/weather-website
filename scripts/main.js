@@ -16,6 +16,7 @@ const search = async (e) => {
         console.warn(coordinates.message);
     } else if (!coordinates.length) {
         console.warn('Location not found');
+        showNotFound();
     } else {
         // console.info('The location is', coordinates[0]);
 
@@ -465,6 +466,31 @@ const updateHistoryList = (li, locationName) => {
     }
 
     list.prepend(li);
+}
+
+/**
+ * Show the no location founded message.
+ * @param {string} cssQuery CSS Query to find the tag where the message will be added.
+ */
+const showNotFound = (cssQuery = '.weather') => {
+    /*
+    <div class="notFound">
+        <div class="notFound__image"></div>
+        <p class="notFound__text">No location found</p>
+    </div>
+    * */
+
+    let div = createTag('div', {class: 'notFound'});
+
+    let img = createTag('div', {class: 'notFound__image'});
+    div.appendChild(img);
+
+    let p = createTag('p', {class: 'notFound__text'}, 'No location found');
+    div.appendChild(p);
+
+    let container = document.querySelector(cssQuery);
+    container.innerHTML = '';
+    container.appendChild(div);
 }
 
 // ---------- API variables:
