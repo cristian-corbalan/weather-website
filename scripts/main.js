@@ -335,14 +335,14 @@ const changeWeatherBackground = (weather = null) => {
  */
 const toggleFormButtonsStatus = (value = '') => {
     let buttonSearch = document.getElementById('buttonSearch');
-    let buttonCurrentLocation = document.getElementById('buttonCurrentLocation');
+    // let buttonCurrentLocation = document.getElementById('buttonCurrentLocation');
 
     if (!value !== null && String(value).trim()) {
         buttonSearch.disabled = false;
-        buttonCurrentLocation.disabled = false;
+        // buttonCurrentLocation.disabled = false;
     } else {
         buttonSearch.disabled = true;
-        buttonCurrentLocation.disabled = true;
+        // buttonCurrentLocation.disabled = true;
     }
 }
 
