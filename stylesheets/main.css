@@ -141,27 +141,27 @@ body {
 }
 
 body.bg-clear {
-  background-image: url("../../assets/images/weather-backgrounds/clear.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/clear.jpg");
 }
 
 body.bg-clouds {
-  background-image: url("../../assets/images/weather-backgrounds/clouds.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/clouds.jpg");
 }
 
 body.bg-drizzle {
-  background-image: url("../../assets/images/weather-backgrounds/drizzle.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/drizzle.jpg");
 }
 
 body.bg-rain {
-  background-image: url("../../assets/images/weather-backgrounds/rain.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/rain.jpg");
 }
 
 body.bg-thunderstorm {
-  background-image: url("../../assets/images/weather-backgrounds/thunderstorm.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/thunderstorm.jpg");
 }
 
 body.bg-snow {
-  background-image: url("../../assets/images/weather-backgrounds/snow.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/snow.jpg");
 }
 
 body.bg-mist,
@@ -173,7 +173,7 @@ body.bg-sand,
 body.bg-ash,
 body.bg-squall,
 body.bg-tornado {
-  background-image: url("../../assets/images/weather-backgrounds/mist.jpg");
+  background-image: url("./../assets/images/weather-backgrounds/mist.jpg");
 }
 
 .mainHeader {
