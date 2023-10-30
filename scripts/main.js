@@ -35,6 +35,9 @@ const search = async (e) => {
         saveOnHistory(coordinates[0]);
 
         updateHistoryList(createHistoryItem(location, info), location.name);
+
+        searchInput.value = '';
+        toggleFormButtonsStatus();
     }
 }
 
