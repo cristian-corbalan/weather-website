@@ -20,6 +20,7 @@ const search = async (e) => {
     } else {
         // console.info('The location is', coordinates[0]);
 
+        console.info(coordinates);
         let url = getWeatherURL(coordinates[0]);
 
         let info = await getWeather(url);
@@ -45,6 +46,15 @@ const changeFormStatus = (e) => {
     let value = e.target.value;
 
     toggleFormButtonsStatus(value);
+}
+
+const currentLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCurrentWeather);
+
+    } else {
+        console.log("Geolocation disabled.");
+    }
 }
 
 // ---------- Functions:
@@ -88,6 +98,23 @@ const getWeather = (url) => {
     return fetch(url)
         .then(response => response.json());
 }
+
+/**
+ * Show the weather of the current location
+ * @param {GeolocationPosition} position
+ * @return {Promise<void>}
+ */
+async function getCurrentWeather(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    let url = getWeatherURL({lat, lon});
+
+    let info = await getWeather(url);
+
+    showWeather({name: info.name}, info);
+}
+
 
 /**
  *
@@ -508,6 +535,14 @@ const searchInput = document.getElementById('searchInput');
 searchForm.addEventListener('submit', search);
 searchInput.addEventListener('input', changeFormStatus);
 
+
+// ---------- Current location:
+
+const currentButton = document.getElementById('buttonCurrentLocation');
+
+currentButton.addEventListener('click', currentLocation);
+
+currentLocation();
 
 // ---------- History:
 
