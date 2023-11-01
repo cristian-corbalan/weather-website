@@ -3,7 +3,8 @@
 // -------------------- Event functions:
 
 const search = async (e) => {
-    console.log("buscando...")
+    showLoader();
+
     e.preventDefault()
 
     let value = document.getElementById('searchInput').value;
@@ -51,7 +52,6 @@ const changeFormStatus = (e) => {
 const currentLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getCurrentWeather);
-
     } else {
         console.log("Geolocation disabled.");
     }
@@ -105,6 +105,8 @@ const getWeather = (url) => {
  * @return {Promise<void>}
  */
 async function getCurrentWeather(position) {
+    showLoader();
+
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
 
@@ -521,6 +523,15 @@ const showNotFound = (cssQuery = '.weather') => {
     let container = document.querySelector(cssQuery);
     container.innerHTML = '';
     container.appendChild(div);
+}
+
+const showLoader = (cssQuery = '.weather') => {
+    /*
+        <span class="loader"></span>
+    */
+
+    let span = createTag('span', {class: 'loader'});
+    document.querySelector(cssQuery).replaceChildren(span);
 }
 
 // ---------- API variables:
